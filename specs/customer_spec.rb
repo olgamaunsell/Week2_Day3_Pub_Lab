@@ -25,12 +25,19 @@ class TestCustomer < MiniTest::Test
     expected = 94
     actual = customer.wallet
     assert_equal(expected, actual)
+    assert_equal(1006,pub.till)
+  end
 
-    #The method add_money acts on the pub to add
-    #the value of the drink to the till
-    till_expected = 1006
-    actual_till = pub.add_money(drink.price)
-    assert_equal(till_expected, actual_till)
+  def test_customer_can_buy_drink_insufficient_funds
+    drink = Drink.new("Gin", 6)
+    pub = Pub.new("Chanter", 1000, [drink])
+    customer = Customer.new("Kris", 2)
+
+    customer.buy_drink(pub, drink)
+    expected = 2
+    actual = customer.wallet
+    assert_equal(expected, actual)
+    assert_equal(1000,pub.till)
 
   end
 
