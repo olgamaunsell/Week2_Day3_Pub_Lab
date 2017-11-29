@@ -12,4 +12,11 @@ class TestPub < MiniTest::Test
     assert_equal(expected, result)
   end
 
+  def test_pub_has_money_in_till
+    cloisters = Pub.new("Cloisters", 250, [])
+    expected = 250
+    result = cloisters.till
+    assert_equal(expected, result)
+  end
+
 end
