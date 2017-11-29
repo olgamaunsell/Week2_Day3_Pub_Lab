@@ -16,7 +16,7 @@ class TestCustomer < MiniTest::Test
     assert_equal(30, customer.wallet)
   end
 
-  def test_customer_can_buy_drink
+  def test_customer_can_buy_drink__age_over_18
     drink = Drink.new("Gin", 6)
     pub = Pub.new("Chanter", 1000, [drink])
     customer = Customer.new("Olga", 100, 21)
