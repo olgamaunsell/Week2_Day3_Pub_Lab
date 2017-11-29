@@ -58,6 +58,5 @@ class TestCustomer < MiniTest::Test
     expected = false
     actual = customer.can_afford?(drink)
     assert_equal(expected, actual)
-
   end
 end

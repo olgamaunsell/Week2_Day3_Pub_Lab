@@ -2,6 +2,7 @@ require("minitest/autorun")
 require("minitest/rg")
 require_relative("../pub")
 require_relative("../drink")
+require_relative("../customer")
 
 
 class TestPub < MiniTest::Test
@@ -38,6 +39,27 @@ class TestPub < MiniTest::Test
     ccs = Pub.new("ccs", 1000, drinks)
     expected = 1010
     result = ccs.add_money(10)
+  end
+
+
+  def test_pub_will_serve_customer__over18
+    ccs = Pub.new("ccs", 1000, [])
+    kris = Customer.new("Kris", 50, 42)
+    # we don't need any drinks as we're not buying!
+
+    expected = true
+    actual = ccs.will_serve?(kris)
+    assert_equal(expected, actual)
+  end
+
+  def test_pub_will_serve_customer__under18
+    ccs = Pub.new("ccs", 1000, [])
+    jennifer = Customer.new("Jennifer", 50, 16)
+    # we don't need any drinks as we're not buying!
+
+    expected = false
+    actual = ccs.will_serve?(jennifer)
+    assert_equal(expected, actual)
   end
 
 end

@@ -14,6 +14,7 @@ class TestDrink < MiniTest::Test
     assert_equal(5, drink.price)
   end
 
+
 end
 
 
