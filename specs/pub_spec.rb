@@ -46,9 +46,9 @@ class TestPub < MiniTest::Test
     ccs = Pub.new("ccs", 1000, [])
     kris = Customer.new("Kris", 50, 42)
     # we don't need any drinks as we're not buying!
-
+    customer_age = kris.age
     expected = true
-    actual = ccs.will_serve?(kris)
+    actual = ccs.will_serve?(customer_age)
     assert_equal(expected, actual)
   end
 
@@ -56,9 +56,10 @@ class TestPub < MiniTest::Test
     ccs = Pub.new("ccs", 1000, [])
     jennifer = Customer.new("Jennifer", 50, 16)
     # we don't need any drinks as we're not buying!
+    customer_age = jennifer.age
 
     expected = false
-    actual = ccs.will_serve?(jennifer)
+    actual = ccs.will_serve?(customer_age)
     assert_equal(expected, actual)
   end
 
