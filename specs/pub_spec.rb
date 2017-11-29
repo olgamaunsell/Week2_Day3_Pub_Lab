@@ -11,7 +11,7 @@ class TestPub < MiniTest::Test
   # a maximum drunkenness level tolerated by refusing to serve
   # a customer
   def test_pub_has_name
-    cloisters = Pub.new("Cloisters", 250, [])
+    cloisters = Pub.new("Cloisters", 250, [], 500)
     expected = "Cloisters"
     result = cloisters.name
     assert_equal(expected, result)
@@ -25,8 +25,8 @@ class TestPub < MiniTest::Test
   end
 
   def test_pub_has_drinks
-    tennants = Drink.new("Tennants", 5)
-    gin = Drink.new("Gin", 7)
+    tennants = Drink.new("Tennants", 5, 100)
+    gin = Drink.new("Gin", 7, 200)
     drinks = [tennants, gin]
     cloisters = Pub.new("Cloisters", 250, drinks, 500)
     expected = drinks
@@ -35,8 +35,8 @@ class TestPub < MiniTest::Test
   end
 
   def test_add_money_to_till
-    tennants = Drink.new("Tennants", 5)
-    gin = Drink.new("Gin", 7)
+    tennants = Drink.new("Tennants", 5, 100)
+    gin = Drink.new("Gin", 7, 150)
     drinks = [tennants, gin]
     ccs = Pub.new("ccs", 1000, drinks, 500)
     expected = 1010
@@ -46,8 +46,9 @@ class TestPub < MiniTest::Test
 
   def test_pub_will_serve_customer__over18
     ccs = Pub.new("ccs", 1000, [], 500)
-    kris = Customer.new("Kris", 50, 42)
+    kris = Customer.new("Kris", 50, 42, 10)
     # we don't need any drinks as we're not buying!
+    # Test to check customer over 18 and under drunkenness level of pub
     customer_age = kris.age
     customer_drunkenness = kris.drunkenness
     expected = true
@@ -57,10 +58,10 @@ class TestPub < MiniTest::Test
 
   def test_pub_will_not_serve_customer__under18
     ccs = Pub.new("ccs", 1000, [], 500)
-    jennifer = Customer.new("Jennifer", 50, 16)
+    jennifer = Customer.new("Jennifer", 50, 16, 0)
     # we don't need any drinks as we're not buying!
     customer_age = jennifer.age
-    customer_drunkenness = kris.drunkenness
+    customer_drunkenness = jennifer.drunkenness
     expected = false
     actual = ccs.will_serve?(customer_age, customer_drunkenness)
     assert_equal(expected, actual)

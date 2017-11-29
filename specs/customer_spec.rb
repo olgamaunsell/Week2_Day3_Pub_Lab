@@ -7,17 +7,17 @@ require_relative("../pub")
 class TestCustomer < MiniTest::Test
 
   def test_customer_has_name
-    customer = Customer.new("Olga", 30, 21)
+    customer = Customer.new("Olga", 30, 21,0)
     assert_equal("Olga", customer.name)
   end
 
   def test_customer_has_money
-    customer = Customer.new("Olga", 30, 21)
+    customer = Customer.new("Olga", 30, 21,0)
     assert_equal(30, customer.wallet)
   end
 
   def test_customer_drunkenness__is_zero
-    customer = Customer.new("Olga", 30, 21)
+    customer = Customer.new("Olga", 30, 21,0)
     assert_equal(0, customer.drunkenness)
   end
 
@@ -25,7 +25,7 @@ class TestCustomer < MiniTest::Test
     drink1 = Drink.new("Gin", 6, 100)
     drink2 = Drink.new("Vodka", 7, 150)
     pub = Pub.new("Chanter", 1000, [drink1, drink2], 500)
-    customer = Customer.new("Olga", 100, 21)
+    customer = Customer.new("Olga", 100, 21,0)
     #customer buys 1st drink
     customer.buy_drink(pub, drink1)
     expected = 94
@@ -46,7 +46,7 @@ class TestCustomer < MiniTest::Test
   def test_customer_can_buy_drink_insufficient_funds
     drink = Drink.new("Gin", 6, 100)
     pub = Pub.new("Chanter", 1000, [drink], 500)
-    customer = Customer.new("Kris", 2, 21)
+    customer = Customer.new("Kris", 2, 21, 0)
 
     customer.buy_drink(pub, drink)
     expected = 2
@@ -58,7 +58,7 @@ class TestCustomer < MiniTest::Test
 
   def test_customer_can_afford_drink_true
     drink = Drink.new("Gin", 6, 100)
-    customer = Customer.new("Olga", 100, 21)
+    customer = Customer.new("Olga", 100, 21, 0)
 
     expected = true
     actual = customer.can_afford?(drink)
@@ -68,7 +68,7 @@ class TestCustomer < MiniTest::Test
 
   def test_customer_can_afford_drink_false
     drink = Drink.new("Gin", 6, 100)
-    customer = Customer.new("Olga", 4, 21)
+    customer = Customer.new("Olga", 4, 21, 0)
 
     expected = false
     actual = customer.can_afford?(drink)
@@ -78,7 +78,7 @@ class TestCustomer < MiniTest::Test
   def test_customer_can_buy_drink__under18
     drink = Drink.new("Gin", 6, 100)
     pub = Pub.new("Chanter", 1000, [drink], 500)
-    lorna = Customer.new("Lorna", 100, 12)
+    lorna = Customer.new("Lorna", 100, 12, 0)
 
     lorna.buy_drink(pub, drink)
     expected = 100

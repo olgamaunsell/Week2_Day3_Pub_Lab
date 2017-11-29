@@ -13,10 +13,13 @@ class Pub
     @till += amount
   end
 
-  def will_serve?(age)
-    # Pub checks customer age before serving
-    return true if age >= 18
-    return false if age < 18
+  def will_serve?(age, drunkenness)
+    # Pub checks customer age is over 18 and below drunkenness level before serving
+    return true if (age >= 18) && (drunkenness < @drunkenness_level)
+
+    # return true ((if age >= 18) && (if drunkenness > @drunkenness_level))
+    #otherwise
+    return false
   end
 end
 
