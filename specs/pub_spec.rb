@@ -1,6 +1,8 @@
 require("minitest/autorun")
 require("minitest/rg")
 require_relative("../pub")
+require_relative("../drink")
+
 
 class TestPub < MiniTest::Test
 
@@ -16,6 +18,16 @@ class TestPub < MiniTest::Test
     cloisters = Pub.new("Cloisters", 250, [])
     expected = 250
     result = cloisters.till
+    assert_equal(expected, result)
+  end
+
+  def test_pub_has_drinks
+    tennants = Drink.new("Tennants", 5)
+    gin = Drink.new("Gin", 7)
+    drinks = [tennants, gin]
+    cloisters = Pub.new("Cloisters", 250, drinks)
+    expected = drinks
+    result = cloisters.drinks
     assert_equal(expected, result)
   end
 
