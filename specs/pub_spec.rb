@@ -31,4 +31,13 @@ class TestPub < MiniTest::Test
     assert_equal(expected, result)
   end
 
+  def test_add_money_to_till
+    tennants = Drink.new("Tennants", 5)
+    gin = Drink.new("Gin", 7)
+    drinks = [tennants, gin]
+    ccs = Pub.new("ccs", 1000, drinks)
+    expected = 1010
+    result = ccs.add_money(10)
+  end
+
 end
